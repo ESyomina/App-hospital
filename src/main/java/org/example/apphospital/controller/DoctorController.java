@@ -10,28 +10,27 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("/doctor")
 public class DoctorController {
 
     DoctorService doctorService;
 
-    @PostMapping("/add")
+    @PostMapping("api/doctor/v1/doctor")
     public ResponseEntity<?> addDoctor(@RequestBody Doctor doctor) {
         doctorService.save(doctor);
         return ResponseEntity.ok().body("Данные успешно добавлены");
     }
 
-    @GetMapping("/info/{id}")
-    public Doctor getInfoDoctor(@PathVariable Integer id) {
-        return doctorService.findById(id);
-    }
-
-    @GetMapping("/list")
+    @GetMapping("api/doctor/v1/doctor")
     public List<Doctor> getListDoctor() {
         return doctorService.findAll();
     }
 
-    @DeleteMapping("/dell/{id}")
+    @GetMapping("api/doctor/v1/doctor/{id}")
+    public Doctor getInfoDoctor(@PathVariable Integer id) {
+        return doctorService.findById(id);
+    }
+
+    @DeleteMapping("api/doctor/v1/doctor/{id}")
     public ResponseEntity<?> delDoctor(@PathVariable Integer id) {
         doctorService.del(id);
         return ResponseEntity.ok().body("Данные успешно удалены");

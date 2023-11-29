@@ -11,26 +11,25 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("/patient")
 public class PatientController {
     PatientService patientService;
-    @PostMapping("/add")
+    @PostMapping("api/patient/v1/patient")
     public ResponseEntity<?> addPatient(@RequestBody Patient patient) {
         patientService.save(patient);
         return ResponseEntity.ok().body("Данные успешно добавлены");
     }
 
-    @GetMapping("/list")
+    @GetMapping("api/patient/v1/patient")
     public List<Patient> getListPatient() {
         return patientService.findAll();
     }
 
-    @GetMapping("/info/{id}")
+    @GetMapping("api/patient/v1/patient/{id}")
     public Patient getInfoDoctor(@PathVariable Integer id) {
         return patientService.findById(id);
     }
 
-    @DeleteMapping("/dell/{id}")
+    @DeleteMapping("api/patient/v1/patient/{id}")
     public ResponseEntity<?> delPatient(@PathVariable Integer id) {
         patientService.del(id);
         return ResponseEntity.ok().body("Данные успешно удалены");

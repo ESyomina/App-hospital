@@ -15,13 +15,12 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("/visit")
 public class VisitController {
     VisitService visitService;
     DoctorService doctorService;
     PatientService patientService;
 
-    @PostMapping("/add")
+    @PostMapping("api/visit/v1/visit")
     public ResponseEntity<?> addDoctor(@RequestBody VisitAddDao visit) {
         Doctor doctor = doctorService.findById(visit.id_doctor);
         Patient patient = patientService.findById(visit.id_patient);
@@ -29,12 +28,12 @@ public class VisitController {
         return ResponseEntity.ok().body("Посещение зарегистрирвоано");
     }
 
-    @GetMapping("/list/forPatient/{id}")
+    @GetMapping("api/visit/v1/visit/patient/{id}")
     public List<Visit> getListForPatient(@PathVariable Integer id) {
         return visitService.findAllDyPatientId(id);
     }
 
-    @GetMapping("/list/forDoctor/{id}")
+    @GetMapping("api/visit/v1/visit/doctor/{id}")
     public List<Visit> getListForDoctor(@PathVariable Integer id) {
         return visitService.findAllDyDoctorId(id);
     }
